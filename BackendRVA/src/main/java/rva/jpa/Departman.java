@@ -25,13 +25,14 @@ public class Departman implements Serializable {
 	private String naziv;
 
 	private String oznaka;
-
+	
+	
 	//bi-directional many-to-one association to Fakultet
 	@ManyToOne
 	@JoinColumn(name="fakultet")
 	private Fakultet fakultetBean;
 	
-	
+	@JsonIgnore
 	//bi-directional many-to-one association to Student
 	@OneToMany(mappedBy="departmanBean")
 	private List<Student> students;
