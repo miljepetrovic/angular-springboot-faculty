@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import rva.jpa.Fakultet;
 import rva.reps.FakultetRepository;
-
+@Api(tags= {"Fakultet CRUD operacije"})
 @RestController
 public class FakultetRestController {
 	
@@ -25,21 +27,25 @@ public class FakultetRestController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	@ApiOperation(value="Daje listu svih fakulteta iz baze podataka")
 	@GetMapping("/fakultet")
 	public Collection<Fakultet> getFakulteti() {
 		return fakultetRepository.findAll();
 	}
 	
+	@ApiOperation(value="Vraca podatke iz baze podataka o fakultetu sa prosledjenim id-om")
 	@GetMapping("/fakultet/{id}")
 	public Fakultet getFakultet(@PathVariable Integer id) {
 		return fakultetRepository.getOne(id);
 	}
 	
+	@ApiOperation(value="Vraca podatke iz baze podataka o fakultetima koji sadrze u svom nazivu prosledjeni string")
 	@GetMapping("/fakultetNaziv/{naziv}")
 	public Collection<Fakultet> getByNaziv(@PathVariable String naziv) {
 		return fakultetRepository.findByNazivContainingIgnoreCase(naziv);
 	}
 	
+	@ApiOperation(value="Brise fakultet sa prosledjenim id-om iz baze podataka")
 	@DeleteMapping("/fakultet/{id}")
 	public ResponseEntity<HttpStatus> deleteFakultet(@PathVariable Integer id) {
 		if (fakultetRepository.existsById(id)) {
@@ -53,12 +59,14 @@ public class FakultetRestController {
 		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
 	}
 	
+	@ApiOperation(value="Upisuje novi fakultet")
 	@PostMapping("/fakultet")
 	public ResponseEntity<HttpStatus> insertFakultet(@RequestBody Fakultet fakultet) {
 		fakultetRepository.save(fakultet);
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Azurira podatke o postojecem fakultetu")
 	@PutMapping("/fakultet")
 	public ResponseEntity<HttpStatus> updateFakultet(@RequestBody Fakultet fakultet) {
 		if (fakultetRepository.existsById(fakultet.getId())) {
