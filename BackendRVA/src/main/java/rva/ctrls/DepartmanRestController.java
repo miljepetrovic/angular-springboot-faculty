@@ -47,18 +47,18 @@ public class DepartmanRestController {
 	}
 	
 	@ApiOperation(value="Upisuje novi departman u bazu podataka")
-	@PostMapping("/departman/")
+	@PostMapping("/departman")
 	public ResponseEntity<Departman> insertDepartman(@RequestBody Departman departman) {
 		departmanRepository.save(departman);
 		return new ResponseEntity<Departman>(HttpStatus.OK);
 	}
 	
 	@ApiOperation(value="Azurira podatke o postojecem departmanu u bazi podataka")
-	@PutMapping("/departman/")
+	@PutMapping("/departman")
 	public ResponseEntity<Departman> updateDepartman(@RequestBody Departman departman) {
 		if(departmanRepository.existsById(departman.getId())) {
 			departmanRepository.save(departman);
-			return new ResponseEntity<Departman>(HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

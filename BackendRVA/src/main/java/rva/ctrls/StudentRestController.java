@@ -41,7 +41,7 @@ public class StudentRestController {
 	}
 	
 	@ApiOperation(value="Upisuje novog studenta u bazu podataka")
-	@PostMapping("/student/")
+	@PostMapping("/student")
 	public ResponseEntity<HttpStatus> insertStudent(@RequestBody Student student) {
 		studentRepository.save(student);
 		return new ResponseEntity<>(HttpStatus.OK);
