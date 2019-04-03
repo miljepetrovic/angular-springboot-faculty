@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,14 +47,16 @@ public class FakultetRestController {
 	}
 	
 	@ApiOperation(value="Brise fakultet sa prosledjenim id-om iz baze podataka")
+	@Transactional
 	@DeleteMapping("/fakultet/{id}")
 	public ResponseEntity<HttpStatus> deleteFakultet(@PathVariable Integer id) {
 		if (fakultetRepository.existsById(id)) {
 			fakultetRepository.deleteById(id);
-			if (id == -101) {
-				jdbcTemplate.execute("insert into \"fakultet\"(\"id\", \"naziv\", \"sediste\")"
-						+ "values(-101,'Obrisani test','Obrisani test');");
-			}
+//			if (id == -101) {
+//				jdbcTemplate.execute("insert into \"fakultet\"(\"id\", \"naziv\", \"sediste\")"
+//						+ "values(-101,'Obrisani test','Obrisani test');");
+//			}
+			jdbcTemplate.execute("delete from departman where fakultet=" + id);
 			return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 		}
 		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,11 +47,12 @@ public class StatusRestController {
 	}
 	
 	@ApiOperation(value="Brise status sa prosledjenim id-om iz baze podataka")
+	@Transactional
 	@DeleteMapping("/status/{id}")
 	public ResponseEntity<HttpStatus> deleteStatus(@PathVariable Integer id) {
 		if (statusRepository.existsById(id)) {
 			statusRepository.deleteById(id);
-			jdbcTemplate.execute("insert into \"status\"(\"id\", \"naziv\", \"oznaka\") values (-101, 'ObrisaniTest', 'OT');");
+			jdbcTemplate.execute("delete from student where status=" + id);
 			return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 		}
 		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
