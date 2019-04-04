@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import rva.jpa.Departman;
+import rva.jpa.Status;
 import rva.jpa.Student;
+import rva.reps.DepartmanRepository;
+import rva.reps.StatusRepository;
 import rva.reps.StudentRepository;
 
 @Api(tags="Student CRUD operacije")
@@ -26,7 +30,11 @@ public class StudentRestController {
 	@Autowired
 	private StudentRepository studentRepository;
 	@Autowired
+	private StatusRepository statusRepository;
+	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private DepartmanRepository departmanRepository;
 	
 	@ApiOperation(value="Vraca kolekciju studenata iz baze podataka")
 	@GetMapping("/student")
@@ -38,6 +46,19 @@ public class StudentRestController {
 	@GetMapping("/student/{id}")
  	public Student getStudent(@PathVariable Integer id) {
 		return studentRepository.getOne(id);
+	}
+	
+	@ApiOperation(value="Vraca studente iz baze podataka koji imaju status sa prosledjenim id-om")
+	@GetMapping("/studentZaStatus/{id}")
+	public Collection<Student> getStudentiPoStatusu(@PathVariable Integer id) {
+		Status status = statusRepository.getOne(id);
+		return studentRepository.findByStatusBean(status);
+	}
+	
+	@GetMapping("/studentZaDepartman/{id}")
+	public Collection<Student> getStudentiPoDepartmanu(@PathVariable Integer id) {
+		Departman departman = departmanRepository.getOne(id);
+		return studentRepository.findByDepartmanBean(departman);
 	}
 	
 	@ApiOperation(value="Upisuje novog studenta u bazu podataka")

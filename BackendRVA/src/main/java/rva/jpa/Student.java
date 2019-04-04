@@ -26,7 +26,7 @@ public class Student implements Serializable {
 	private String ime;
 
 	private String prezime;
-
+	
 	
 	//bi-directional many-to-one association to Departman
 	@ManyToOne
@@ -88,5 +88,5 @@ public class Student implements Serializable {
 	public void setStatusBean(Status statusBean) {
 		this.statusBean = statusBean;
 	}
-
+	
 }

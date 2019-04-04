@@ -18,13 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import rva.jpa.Departman;
+import rva.jpa.Fakultet;
 import rva.reps.DepartmanRepository;
+import rva.reps.FakultetRepository;
 
 @Api(tags="Departman CRUD operacije")
 @RestController
 public class DepartmanRestController {
 	@Autowired
 	private DepartmanRepository departmanRepository;
+	@Autowired
+	private FakultetRepository fakultetRepository;
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
@@ -44,6 +48,13 @@ public class DepartmanRestController {
 	@GetMapping("/departmanNaziv/{naziv}")
 	public Collection<Departman> getByNaziv(@PathVariable String naziv) {
 		return departmanRepository.findByNazivContainingIgnoreCase(naziv);
+	}
+	
+	@ApiOperation(value="Vraca kolekciju departmana iz baze podataka koji pripadaju fakultetu sa prosledjenim id-om")
+	@GetMapping("/departmanZaFakultet/{id}")
+	public Collection<Departman> departmanPoFakultetu(@PathVariable Integer id) {
+		Fakultet fakultet = fakultetRepository.getOne(id);
+		return departmanRepository.findByFakultetBean(fakultet);
 	}
 	
 	@ApiOperation(value="Upisuje novi departman u bazu podataka")
