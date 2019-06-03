@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Departman } from 'src/app/models/departman';
+import { DepartmanService } from 'src/app/services/departman.service';
 
 @Component({
   selector: 'app-departman',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DepartmanComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns = ['id', 'naziv', 'oznaka', 'fakultetBean', 'actions'];
+  dataSource: Observable<Departman[]>;
+
+  constructor(public departmanService: DepartmanService) { }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  public loadData() {
+    this.dataSource = this.departmanService.getDepartmani();
   }
 
 }
