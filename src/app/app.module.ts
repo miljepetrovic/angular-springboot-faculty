@@ -14,6 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthorComponent } from './components/core/author/author.component';
 import { HelpComponent } from './components/core/help/help.component';
 import { HomeComponent } from './components/core/home/home.component';
+import { DepartmanService } from './services/departman.service';
+import { StudentService } from './services/student.service';
+import { StatusService } from './services/status.service';
 
 
 @NgModule({
@@ -43,7 +46,7 @@ import { HomeComponent } from './components/core/home/home.component';
     MatOptionModule,
     HttpClientModule
   ],
-  providers: [FakultetService],
+  providers: [FakultetService, DepartmanService, StudentService, StatusService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

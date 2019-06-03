@@ -11,7 +11,7 @@ export class FakultetService {
 
  dataChange: BehaviorSubject<Fakultet[]> = new BehaviorSubject<Fakultet[]>([]);
 
-    constructor (private httpClient: HttpClient){}
+    constructor(private httpClient: HttpClient){}
 
     public getAllFakultet(): Observable<Fakultet[]>{
         this.httpClient.get<Fakultet[]>(this.API_URL).subscribe(data => {
