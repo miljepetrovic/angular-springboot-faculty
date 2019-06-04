@@ -20,4 +20,16 @@ export class StatusService {
 
          return this.dataChange.asObservable();
      }
+
+     public addStatus(status: Status) {
+        this.httpClient.post(this.API_URL, status);
+     }
+
+     public updateStatus(status: Status) {
+       this.httpClient.put(this.API_URL, status);
+     }
+
+     public deleteStatus(id: number) {
+       this.httpClient.delete(this.API_URL + id);
+     }
 }

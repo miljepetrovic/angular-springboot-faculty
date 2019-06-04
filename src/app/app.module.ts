@@ -33,6 +33,9 @@ import { StudentService } from './services/student.service';
 import { StatusService } from './services/status.service';
 import { FormsModule } from '@angular/forms';
 import { FakultetDialogComponent } from './components/dialogs/fakultet-dialog/fakultet-dialog.component';
+import { StatusDialogComponent } from './components/dialogs/status-dialog/status-dialog.component';
+import { StudentDialogComponent } from './components/dialogs/student-dialog/student-dialog.component';
+import { DepartmanDialogComponent } from './components/dialogs/departman-dialog/departman-dialog.component';
 
 
 @NgModule({
@@ -45,7 +48,10 @@ import { FakultetDialogComponent } from './components/dialogs/fakultet-dialog/fa
     AuthorComponent,
     HelpComponent,
     HomeComponent,
-    FakultetDialogComponent
+    FakultetDialogComponent,
+    StatusDialogComponent,
+    StudentDialogComponent,
+    DepartmanDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +73,7 @@ import { FakultetDialogComponent } from './components/dialogs/fakultet-dialog/fa
     FormsModule,
     HttpClientModule
   ],
-  entryComponents: [FakultetDialogComponent],
+  entryComponents: [FakultetDialogComponent, StatusDialogComponent],
   providers: [FakultetService, DepartmanService, StudentService, StatusService],
   bootstrap: [AppComponent]
 })
