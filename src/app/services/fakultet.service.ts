@@ -20,4 +20,16 @@ export class FakultetService {
 
         return this.dataChange.asObservable();
     }
+
+    public addFakultet(fakultet: Fakultet) {
+      this.httpClient.post(this.API_URL, fakultet).subscribe();
+    }
+
+    public updateFakultet(fakultet: Fakultet) {
+      this.httpClient.put(this.API_URL, fakultet).subscribe();
+    }
+
+    public deleteFakultet(id: number) {
+      this.httpClient.delete(this.API_URL + id).subscribe();
+    }
 }

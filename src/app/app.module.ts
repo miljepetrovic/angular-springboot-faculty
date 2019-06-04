@@ -9,7 +9,21 @@ import { DepartmanComponent } from './components/departman/departman.component';
 import { StatusComponent } from './components/status/status.component';
 import { FakultetComponent } from './components/fakultet/fakultet.component';
 import { FakultetService } from './services/fakultet.service';
-import {MatButtonModule, MatIconModule, MatSidenavModule, MatListModule, MatGridListModule, MatExpansionModule, MatTableModule, MatToolbarModule, MatSelectModule, MatOptionModule, MatSelect} from '@angular/material';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatSidenavModule,
+  MatListModule,
+  MatGridListModule,
+  MatExpansionModule,
+  MatTableModule,
+  MatToolbarModule,
+  MatSelectModule,
+  MatOptionModule,
+  MatSnackBarModule,
+  MatDialogModule,
+  MatInputModule }
+  from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthorComponent } from './components/core/author/author.component';
 import { HelpComponent } from './components/core/help/help.component';
@@ -17,6 +31,8 @@ import { HomeComponent } from './components/core/home/home.component';
 import { DepartmanService } from './services/departman.service';
 import { StudentService } from './services/student.service';
 import { StatusService } from './services/status.service';
+import { FormsModule } from '@angular/forms';
+import { FakultetDialogComponent } from './components/dialogs/fakultet-dialog/fakultet-dialog.component';
 
 
 @NgModule({
@@ -28,7 +44,8 @@ import { StatusService } from './services/status.service';
     FakultetComponent,
     AuthorComponent,
     HelpComponent,
-    HomeComponent
+    HomeComponent,
+    FakultetDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +61,13 @@ import { StatusService } from './services/status.service';
     MatToolbarModule,
     MatSelectModule,
     MatOptionModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatInputModule,
+    FormsModule,
     HttpClientModule
   ],
+  entryComponents: [FakultetDialogComponent],
   providers: [FakultetService, DepartmanService, StudentService, StatusService],
   bootstrap: [AppComponent]
 })
