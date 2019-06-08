@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Status } from 'src/app/models/status';
 import { StatusService } from 'src/app/services/status.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTableDataSource } from '@angular/material';
 import { StatusDialogComponent } from '../dialogs/status-dialog/status-dialog.component';
 
 @Component({
@@ -12,7 +12,7 @@ import { StatusDialogComponent } from '../dialogs/status-dialog/status-dialog.co
 })
 export class StatusComponent implements OnInit {
   displayedColumns = ['id', 'naziv', 'oznaka', 'actions'];
-  dataSource: Observable<Status[]>;
+  dataSource: MatTableDataSource<Status>;
 
   constructor(public statusService: StatusService, public dialog: MatDialog) { }
 
@@ -21,7 +21,9 @@ export class StatusComponent implements OnInit {
   }
 
   public loadData() {
-      this.dataSource = this.statusService.getAllStatus();
+      this.statusService.getAllStatus().subscribe(data => {
+        this.dataSource = new MatTableDataSource(data);
+      });
   }
 
   public openDialog(flag: number, id: number, naziv: string, oznaka: string) {

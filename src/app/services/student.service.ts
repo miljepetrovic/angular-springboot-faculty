@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Student } from '../models/student';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,22 @@ export class StudentService {
      public getStudenti(): Observable<Student[]>{
          this.httpClient.get<Student[]>(this.API_URL).subscribe(data => {
              this.dataChange.next(data);
-         })
+         }, (error: HttpErrorResponse) => {
+          console.log(error.name + ' ' + error.message);
+        });
 
          return this.dataChange.asObservable();
+     }
+
+     public addStudent(student: Student) {
+       this.httpClient.post(this.API_URL, student).subscribe();
+     }
+
+     public updateStudent(student: Student) {
+       this.httpClient.put(this.API_URL, student).subscribe();
+     }
+
+     public deleteStudent(id: number) {
+       this.httpClient.delete(this.API_URL + id).subscribe();
      }
 }

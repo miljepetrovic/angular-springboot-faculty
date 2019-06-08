@@ -73,7 +73,7 @@ import { DepartmanDialogComponent } from './components/dialogs/departman-dialog/
     FormsModule,
     HttpClientModule
   ],
-  entryComponents: [FakultetDialogComponent, StatusDialogComponent],
+  entryComponents: [FakultetDialogComponent, StatusDialogComponent, DepartmanDialogComponent, StudentDialogComponent  ],
   providers: [FakultetService, DepartmanService, StudentService, StatusService],
   bootstrap: [AppComponent]
 })

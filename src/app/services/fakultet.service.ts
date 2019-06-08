@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Fakultet } from '../models/fakultet';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,10 @@ export class FakultetService {
     public getAllFakultet(): Observable<Fakultet[]>{
         this.httpClient.get<Fakultet[]>(this.API_URL).subscribe(data => {
             this.dataChange.next(data);
-        })
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error.name + ' ' + error.message);
+        });
 
         return this.dataChange.asObservable();
     }
