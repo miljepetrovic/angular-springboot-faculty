@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { StudentService } from 'src/app/services/student.service';
 import { Observable } from 'rxjs';
 import { Student } from 'src/app/models/student';
@@ -16,14 +16,25 @@ import { Departman } from 'src/app/models/departman';
 export class StudentComponent implements OnInit {
   displayedColumns = ['id', 'ime', 'prezime', 'brojIndeksa', 'statusBean', 'departmanBean', 'actions'];
   dataSource: Observable<Student[]>;
+  @Input() selektovanStatus: Status;
   constructor(public studentService: StudentService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.loadData();
   }
 
+  ngOnChanges() {
+    if (this.selektovanStatus.id) {
+      this.loadStudentsForStatus();
+    }
+  }
+
   public loadData() {
     this.dataSource = this.studentService.getStudenti();
+  }
+
+  public loadStudentsForStatus() {
+    this.dataSource = this.studentService.getStudentiPoStatusu(this.selektovanStatus.id);
   }
 
   public openDialog(flag: number, id: number, ime:string, prezime: string, brojIndeksa: string, statusBean: Status, departmanBean: Departman) {

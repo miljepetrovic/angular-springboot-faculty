@@ -13,6 +13,7 @@ import { StatusDialogComponent } from '../dialogs/status-dialog/status-dialog.co
 export class StatusComponent implements OnInit {
   displayedColumns = ['id', 'naziv', 'oznaka', 'actions'];
   dataSource: MatTableDataSource<Status>;
+  selektovanStatus: Status;
 
   constructor(public statusService: StatusService, public dialog: MatDialog) { }
 
@@ -36,6 +37,10 @@ export class StatusComponent implements OnInit {
          this.loadData();
        }
      })
+  }
+
+  selectRow(row) {
+    this.selektovanStatus = row;
   }
 
 }
