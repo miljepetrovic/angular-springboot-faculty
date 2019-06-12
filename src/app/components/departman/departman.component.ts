@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Departman } from 'src/app/models/departman';
 import { DepartmanService } from 'src/app/services/departman.service';
@@ -15,6 +15,7 @@ export class DepartmanComponent implements OnInit {
 
   displayedColumns = ['id', 'naziv', 'oznaka', 'fakultetBean', 'actions'];
   dataSource: MatTableDataSource<Departman>;
+  @Input() selektovanFakultet: Fakultet;
 
   constructor(public departmanService: DepartmanService, public dialog: MatDialog) { }
 
@@ -22,11 +23,22 @@ export class DepartmanComponent implements OnInit {
     this.loadData();
   }
 
+  ngOnChanges() {
+    if(this.selektovanFakultet.id) {
+      this.loadDepartmansForFakultet();
+    }
+  }
+
   public loadData() {
     this.departmanService.getDepartmani().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
     });
 }
+  public loadDepartmansForFakultet() {
+    this.departmanService.getDepartmanPoFakultetu(this.selektovanFakultet.id).subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+    });
+  }
 
   openDialog(flag: number, id: number, oznaka: string, naziv: string, fakultetBean: Fakultet) {
     const dialogRef = this.dialog.open(DepartmanDialogComponent, {data: {id: id, oznaka: oznaka, naziv: naziv, fakultetBean: fakultetBean}});

@@ -14,6 +14,7 @@ export class FakultetComponent implements OnInit {
 
   displayedColumns = ['id', 'naziv', 'sediste', 'actions'];
   dataSource: MatTableDataSource<Fakultet>;
+  selektovanFakultet: Fakultet;
 
   constructor(public fakultetService: FakultetService, public dialog: MatDialog) { }
 
@@ -36,6 +37,9 @@ export class FakultetComponent implements OnInit {
           this.loadData();
         }
       })
+  }
 
+  selectRow(row) {
+    this.selektovanFakultet = row;
   }
 }

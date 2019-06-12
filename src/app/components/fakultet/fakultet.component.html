@@ -41,6 +41,11 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row style="cursor: default" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row style="cursor: pointer" *matRowDef="let row; columns: displayedColumns;" (click)="selectRow(row)"></mat-row>
   </mat-table>
+ </div>
+
+ <div class="container mat-elevation-z8">
+  <app-departman *ngIf="selektovanFakultet"
+  [selektovanFakultet]="selektovanFakultet"></app-departman>
  </div>
