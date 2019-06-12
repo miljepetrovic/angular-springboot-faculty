@@ -5,6 +5,8 @@ import { StudentService } from 'src/app/services/student.service';
 import { StatusService } from 'src/app/services/status.service';
 import { StatusDialogComponent } from '../status-dialog/status-dialog.component';
 import { Student } from 'src/app/models/student';
+import { DepartmanService } from 'src/app/services/departman.service';
+import { Departman } from 'src/app/models/departman';
 
 @Component({
   selector: 'app-student-dialog',
@@ -14,9 +16,11 @@ import { Student } from 'src/app/models/student';
 export class StudentDialogComponent implements OnInit {
   public flag: number;
   statusi: Status[];
+  departmani: Departman[];
   constructor(public snackBar: MatSnackBar,
               public studentService: StudentService,
               public statusService: StatusService,
+              public departmanService: DepartmanService,
               public dialogRef: MatDialogRef<StatusDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Student) { }
 
@@ -25,14 +29,19 @@ export class StudentDialogComponent implements OnInit {
       {
         this.statusi = statusi;
       });
+
+    this.departmanService.getDepartmani().subscribe(departmani => {
+      this.departmani = departmani;
+    })
   }
 
   compareTo(a, b) {
     return a.id == b.id;
   }
 
-  onChange(status) {
-    this.data.status = status;
+  onChange(statusBean, departmanBean) {
+    this.data.statusBean = statusBean;
+    this.data.departmanBean = departmanBean;
   }
 
   public add(): void {

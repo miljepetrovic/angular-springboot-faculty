@@ -25,9 +25,19 @@
 
               <div class="form">
                   <mat-form-field>
-                    <mat-select [(ngModel)]="data.status" placeholder="Status" name="status" [compareWith]="compareTo" [disabled]="flag == 3">
-                      <mat-option *ngFor="let status of statusi" [value]="status">
-                        {{ status.naziv }}
+                    <mat-select [(ngModel)]="data.statusBean" placeholder="Status" name="status" [compareWith]="compareTo" [disabled]="flag == 3">
+                      <mat-option *ngFor="let statusBean of statusi" [value]="statusBean">
+                        {{ statusBean.naziv }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="form">
+                  <mat-form-field>
+                    <mat-select [(ngModel)]="data.departmanBean" placeholder="Departman" name="departman" [compareWith]="compareTo" [disabled]="flag == 3">
+                      <mat-option *ngFor="let departmanBean of departmani" [value]="departmanBean">
+                        {{ departmanBean.naziv }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>

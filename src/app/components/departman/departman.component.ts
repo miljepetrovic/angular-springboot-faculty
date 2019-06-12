@@ -29,8 +29,8 @@ export class DepartmanComponent implements OnInit {
 }
 
   openDialog(flag: number, id: number, oznaka: string, naziv: string, fakultetBean: Fakultet) {
-    console.log(id + ' ' + naziv + ' ' + oznaka + ' ' + fakultetBean);
-    const dialogRef = this.dialog.open(DepartmanDialogComponent, {data: {id: id, oznaka: oznaka, naziv: naziv, fakultet: fakultetBean}});
+    console.log(id + ' ' + naziv + ' ' + oznaka + ' ' + fakultetBean.naziv);
+    const dialogRef = this.dialog.open(DepartmanDialogComponent, {data: {id: id, oznaka: oznaka, naziv: naziv, fakultetBean: fakultetBean}});
     dialogRef.componentInstance.flag = flag;
 
     dialogRef.afterClosed().subscribe(result => {

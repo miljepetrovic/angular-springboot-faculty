@@ -20,9 +20,9 @@
 
           <div class="form">
               <mat-form-field>
-                <mat-select [(ngModel)]="data.fakultet" placeholder="Fakultet" name="fakultet" [compareWith]="compareTo" [disabled]="flag == 3">
-                  <mat-option *ngFor="let fakultet of fakulteti" [value]="fakultet">
-                    {{ fakultet.naziv }}
+                <mat-select [(ngModel)]="data.fakultetBean" placeholder="Fakultet" name="fakultet" [compareWith]="compareTo" [disabled]="flag == 3">
+                  <mat-option *ngFor="let fakultetBean of fakulteti" [value]="fakultetBean">
+                    {{ fakultetBean.naziv }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>

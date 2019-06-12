@@ -6,6 +6,6 @@ export class Student {
   brojIndeksa: string;
   ime: string;
   prezime: string;
-  departman: Departman;
-  status: Status;
+  departmanBean: Departman;
+  statusBean: Status;
 }

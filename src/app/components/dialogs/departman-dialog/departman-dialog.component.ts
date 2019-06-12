@@ -22,7 +22,7 @@ export class DepartmanDialogComponent implements OnInit {
               public fakultetService: FakultetService) { }
 
   ngOnInit() {
-    this.fakultetService.getAllFakultet().subscribe(fakulteti =>
+      this.fakultetService.getAllFakultet().subscribe(fakulteti =>
         this.fakulteti = fakulteti
       );
     }
@@ -31,8 +31,8 @@ export class DepartmanDialogComponent implements OnInit {
     return a.id == b.id;
   }
 
-  onChange(fakultet) {
-    this.data.fakultet = fakultet;
+  onChange(fakultetBean) {
+    this.data.fakultetBean = fakultetBean;
   }
 
   public add(): void {

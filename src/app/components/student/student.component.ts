@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { Status } from 'src/app/models/status';
 import { StatusDialogComponent } from '../dialogs/status-dialog/status-dialog.component';
 import { StudentDialogComponent } from '../dialogs/student-dialog/student-dialog.component';
+import { Departman } from 'src/app/models/departman';
 
 @Component({
   selector: 'app-student',
@@ -13,7 +14,7 @@ import { StudentDialogComponent } from '../dialogs/student-dialog/student-dialog
   styleUrls: ['./student.component.css']
 })
 export class StudentComponent implements OnInit {
-  displayedColumns = ['id', 'ime', 'prezime', 'brojIndeksa', 'statusBean', 'actions'];
+  displayedColumns = ['id', 'ime', 'prezime', 'brojIndeksa', 'statusBean', 'departmanBean', 'actions'];
   dataSource: Observable<Student[]>;
   constructor(public studentService: StudentService, public dialog: MatDialog) { }
 
@@ -25,8 +26,8 @@ export class StudentComponent implements OnInit {
     this.dataSource = this.studentService.getStudenti();
   }
 
-  public openDialog(flag: number, id: number, ime:string, prezime: string, brojIndeksa: string, status: Status) {
-    const dialogRef = this.dialog.open(StudentDialogComponent, {data: {id: id, ime: ime, prezime: prezime, brojIndeksa: brojIndeksa, status: status}});
+  public openDialog(flag: number, id: number, ime:string, prezime: string, brojIndeksa: string, statusBean: Status, departmanBean: Departman) {
+    const dialogRef = this.dialog.open(StudentDialogComponent, {data: {id: id, ime: ime, prezime: prezime, brojIndeksa: brojIndeksa, statusBean: statusBean, departmanBean: departmanBean}});
     console.log("objekat? " + status);
     dialogRef.componentInstance.flag = flag;
 
