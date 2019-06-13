@@ -28,6 +28,8 @@ export class DepartmanComponent implements OnInit {
   public loadData() {
       this.departmanService.getDepartmani().subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
   }
 
