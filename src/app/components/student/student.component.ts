@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { StudentService } from 'src/app/services/student.service';
 import { Observable } from 'rxjs';
 import { Student } from 'src/app/models/student';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Status } from 'src/app/models/status';
 import { StatusDialogComponent } from '../dialogs/status-dialog/status-dialog.component';
 import { StudentDialogComponent } from '../dialogs/student-dialog/student-dialog.component';
@@ -15,8 +15,10 @@ import { Departman } from 'src/app/models/departman';
 })
 export class StudentComponent implements OnInit {
   displayedColumns = ['id', 'ime', 'prezime', 'brojIndeksa', 'statusBean', 'departmanBean', 'actions'];
-  dataSource: Observable<Student[]>;
+  dataSource: MatTableDataSource<Student>;
   @Input() selektovanDepartman: Departman;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(public studentService: StudentService, public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -30,7 +32,11 @@ export class StudentComponent implements OnInit {
   }
 
   public loadData() {
-    this.dataSource = this.studentService.getStudentiPoDepartmanu(this.selektovanDepartman.id);
+    this.studentService.getStudentiPoDepartmanu(this.selektovanDepartman.id).subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 
   public openDialog(flag: number, id: number, ime:string, prezime: string, brojIndeksa: string, statusBean: Status, departmanBean: Departman) {
@@ -43,5 +49,11 @@ export class StudentComponent implements OnInit {
         this.loadData();
       }
     })
+  }
+
+  applyFilter(filterValue: string){
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLocaleLowerCase();
+    this.dataSource.filter = filterValue;
   }
 }

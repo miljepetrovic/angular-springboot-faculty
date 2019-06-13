@@ -8,17 +8,17 @@
       </mat-form-field>
   <mat-table [dataSource]="dataSource" class="mat-cell" matSort>
     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
       <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="naziv">
-      <mat-header-cell *matHeaderCellDef>Naziv</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Naziv</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.naziv}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="oznaka">
-      <mat-header-cell *matHeaderCellDef>Oznaka</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Oznaka</mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.oznaka}}</mat-cell>
     </ng-container>
 
@@ -43,6 +43,10 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row style="cursor: default" *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+  <mat-paginator [length]="100"
+  [pageSize]="10"
+  [pageSizeOptions]="[2,5, 10, 25, 100]">
+</mat-paginator>
  </div>
 
 
