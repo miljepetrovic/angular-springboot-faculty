@@ -3,10 +3,8 @@
  </mat-toolbar>
 
  <div class="container mat-elevation-z8">
+
   <mat-table [dataSource]="dataSource" class="mat-cell">
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-    <!-- ID Column -->
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
       <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>

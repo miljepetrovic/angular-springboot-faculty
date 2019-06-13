@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Departman } from 'src/app/models/departman';
 import { DepartmanService } from 'src/app/services/departman.service';
 import { Fakultet } from 'src/app/models/fakultet';
 import { DepartmanDialogComponent } from '../dialogs/departman-dialog/departman-dialog.component';
-import { MatDialog, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-departman',
@@ -16,6 +16,8 @@ export class DepartmanComponent implements OnInit {
   displayedColumns = ['id', 'naziv', 'oznaka', 'fakultetBean', 'actions'];
   dataSource: MatTableDataSource<Departman>;
   selektovanDepartman: Departman;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(public departmanService: DepartmanService, public dialog: MatDialog) { }
 
 
@@ -40,5 +42,11 @@ export class DepartmanComponent implements OnInit {
   }
   selectRow(row) {
     this.selektovanDepartman = row;
+  }
+
+  applyFilter(filterValue: string){
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLocaleLowerCase();
+    this.dataSource.filter = filterValue;
   }
 }
