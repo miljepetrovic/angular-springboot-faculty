@@ -22,7 +22,9 @@ import {
   MatOptionModule,
   MatSnackBarModule,
   MatDialogModule,
-  MatInputModule }
+  MatInputModule,
+  MatPaginatorModule,
+  MatSortModule}
   from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthorComponent } from './components/core/author/author.component';
@@ -70,6 +72,8 @@ import { DepartmanDialogComponent } from './components/dialogs/departman-dialog/
     MatSnackBarModule,
     MatDialogModule,
     MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
     FormsModule,
     HttpClientModule
   ],
