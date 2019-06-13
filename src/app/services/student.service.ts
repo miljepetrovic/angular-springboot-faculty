@@ -10,7 +10,8 @@ import { identifierModuleUrl } from '@angular/compiler';
 export class StudentService {
 
   private readonly API_URL = 'http://localhost:8083/student/';
-  private readonly API_URL_BYID = 'http://localhost:8083/studentZaStatus/'
+  private readonly API_URL_BYID = 'http://localhost:8083/studentZaDepartman/';
+
 
   dataChange: BehaviorSubject<Student[]> = new BehaviorSubject<Student[]>([]);
 
@@ -26,8 +27,8 @@ export class StudentService {
          return this.dataChange.asObservable();
      }
 
-     public getStudentiPoStatusu(idStatusa): Observable<Student[]>{
-       this.httpClient.get<Student[]>(this.API_URL_BYID + idStatusa).subscribe(data => {
+     public getStudentiPoDepartmanu(idDepartmana): Observable<Student[]>{
+       this.httpClient.get<Student[]>(this.API_URL_BYID + idDepartmana).subscribe(data => {
          this.dataChange.next(data);
        }, (error: HttpErrorResponse) => {
           console.log(error.name + ' ' + error.message);
@@ -35,7 +36,6 @@ export class StudentService {
 
        return this.dataChange.asObservable();
      }
-
      public addStudent(student: Student) {
        this.httpClient.post(this.API_URL, student).subscribe();
      }

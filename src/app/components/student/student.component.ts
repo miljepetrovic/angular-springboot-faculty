@@ -16,25 +16,21 @@ import { Departman } from 'src/app/models/departman';
 export class StudentComponent implements OnInit {
   displayedColumns = ['id', 'ime', 'prezime', 'brojIndeksa', 'statusBean', 'departmanBean', 'actions'];
   dataSource: Observable<Student[]>;
-  @Input() selektovanStatus: Status;
+  @Input() selektovanDepartman: Departman;
   constructor(public studentService: StudentService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.loadData();
+
   }
 
   ngOnChanges() {
-    if (this.selektovanStatus.id) {
-      this.loadStudentsForStatus();
+    if (this.selektovanDepartman.id) {
+      this.loadData();
     }
   }
 
   public loadData() {
-    this.dataSource = this.studentService.getStudenti();
-  }
-
-  public loadStudentsForStatus() {
-    this.dataSource = this.studentService.getStudentiPoStatusu(this.selektovanStatus.id);
+    this.dataSource = this.studentService.getStudentiPoDepartmanu(this.selektovanDepartman.id);
   }
 
   public openDialog(flag: number, id: number, ime:string, prezime: string, brojIndeksa: string, statusBean: Status, departmanBean: Departman) {
