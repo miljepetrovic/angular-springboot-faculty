@@ -1,0 +1,18 @@
+.author-card {
+  margin-top: 20px;
+  margin-left:10px;
+  margin-right:10px;
+}
+.title-center {
+  margin: 0  auto;
+ }
+
+mat-expansion-panel {
+  margin-top:10px;
+  margin-bottom: 10px;
+}
+
+.author-header-image {
+  background-image: url('https://media.licdn.com/dms/image/C4D03AQHIr5deqU3j2w/profile-displayphoto-shrink_200_200/0?e=1565827200&v=beta&t=xr62mfYGSI8l91tovrPbEh1KTElcIIcs9pflsWvoLSk');
+  background-size: cover;
+}

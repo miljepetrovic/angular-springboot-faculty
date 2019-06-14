@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthorComponent implements OnInit {
 
+  vjestine = ['Java', 'OOP', 'UML', 'SQL', 'Android', 'Spring', 'Angular', 'HTML', 'CSS'];
+
   constructor() { }
 
   ngOnInit() {

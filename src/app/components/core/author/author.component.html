@@ -1,3 +1,53 @@
-<p>
-  author works!
-</p>
+<mat-toolbar color="primary">
+    <span class="title-center">Autor</span>
+</mat-toolbar>
+<mat-card class="author-card">
+    <mat-card-header>
+        <div mat-card-avatar class="author-header-image"></div>
+      <mat-card-title>Milan Petrovic</mat-card-title>
+      <mat-card-subtitle>IT51/2016</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>O meni</mat-panel-title>
+        </mat-expansion-panel-header>
+          <mat-panel-description>
+            <p><strong>Mjesto rodjenja:</strong> Banja Luka<br>
+              <strong>Adresa:</strong> Solunskih dobrovoljaca 23/9, Doboj<br>
+            <strong> Datum rodjenja:</strong> 08.05.1997<br>
+            <strong>Broj telefona: </strong> + 381 63 725 59 36<br>
+            <strong>E-Mail:</strong> milanpdo@gmail.com<br>
+            <strong>GitHub:</strong> www.github.com/milan-petrovic<br>
+            <strong>Linkedin:</strong> www.linkedin.com/in/milanpdo
+          </mat-panel-description>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Obrazovanje</mat-panel-title>
+        </mat-expansion-panel-header>
+          <mat-panel-description>
+            <p><strong>Fakultet:</strong> Fakultet Tehnickih Nauka, Univerzitet u Novom Sadu<br>
+            <strong> Smjer:</strong> Inzenjerstvo informacionih sistema (IIS)<br>
+            <strong>Pocetak studija:</strong> 2016<br>
+            <strong>Status:</strong> Budzet<br>
+            <strong>Prosjek:</strong> 8.20<br>
+            <strong> Prethodno obrazovanje:</strong> Gimnazija "Jovan Ducic" Doboj (2012-2016)</p>
+          </mat-panel-description>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Vjestine</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-panel-description>
+            <mat-list>
+                <mat-list-item *ngFor="let vjestina of vjestine">
+                  <mat-icon mat-list-icon>code</mat-icon>
+                  <p >{{ vjestina }}</p>
+                </mat-list-item>
+              </mat-list>
+        </mat-panel-description>
+      </mat-expansion-panel>
+    </mat-card-content>
+  </mat-card>
