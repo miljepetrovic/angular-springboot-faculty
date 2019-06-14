@@ -22,6 +22,7 @@ import rva.jpa.Fakultet;
 import rva.reps.DepartmanRepository;
 import rva.reps.FakultetRepository;
 
+@CrossOrigin
 @Api(tags="Departman CRUD operacije")
 @RestController
 public class DepartmanRestController {
@@ -31,39 +32,39 @@ public class DepartmanRestController {
 	private FakultetRepository fakultetRepository;
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+
 	@ApiOperation(value="Vraca kolekciju departmana iz baze podataka")
 	@GetMapping("/departman")
 	public Collection<Departman> getDepartmani() {
 		return departmanRepository.findAll();
 	}
-	
+
 	@ApiOperation(value="Brise departman sa prosledjenim id-om iz baze podataka")
 	@GetMapping("/departman/{id}")
 	public Departman getDepartman(@PathVariable Integer id) {
 		return departmanRepository.getOne(id);
 	}
-	
+
 	@ApiOperation(value="Vraca kolekciju departmana iz baze podataka koji sadrze prosledjeni string u svom nazivu")
 	@GetMapping("/departmanNaziv/{naziv}")
 	public Collection<Departman> getByNaziv(@PathVariable String naziv) {
 		return departmanRepository.findByNazivContainingIgnoreCase(naziv);
 	}
-	
+
 	@ApiOperation(value="Vraca kolekciju departmana iz baze podataka koji pripadaju fakultetu sa prosledjenim id-om")
 	@GetMapping("/departmanZaFakultet/{id}")
 	public Collection<Departman> departmanPoFakultetu(@PathVariable Integer id) {
 		Fakultet fakultet = fakultetRepository.getOne(id);
 		return departmanRepository.findByFakultetBean(fakultet);
 	}
-	
+
 	@ApiOperation(value="Upisuje novi departman u bazu podataka")
 	@PostMapping("/departman")
 	public ResponseEntity<Departman> insertDepartman(@RequestBody Departman departman) {
 		departmanRepository.save(departman);
 		return new ResponseEntity<Departman>(HttpStatus.OK);
 	}
-	
+
 	@ApiOperation(value="Azurira podatke o postojecem departmanu u bazi podataka")
 	@PutMapping("/departman")
 	public ResponseEntity<Departman> updateDepartman(@RequestBody Departman departman) {
@@ -73,7 +74,7 @@ public class DepartmanRestController {
 		}
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@ApiOperation(value="Brise departman sa prosledjenim id-om iz baze podataka")
 	@Transactional
 	@DeleteMapping("/departman/{id}")
