@@ -28,6 +28,22 @@ export class DepartmanComponent implements OnInit {
   public loadData() {
       this.departmanService.getDepartmani().subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
+
+        this.dataSource.filterPredicate = (data, filter: string) => {
+          const accumulator = (currentTerm, key) => {
+            return key === 'fakultetBean' ? currentTerm + data.fakultetBean.naziv : currentTerm + data[key];
+          };
+          const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+          const transformedFilter = filter.trim().toLowerCase();
+          return dataStr.indexOf(transformedFilter) !== -1;
+        };
+
+        this.dataSource.sortingDataAccessor = (data, property) => {
+          switch(property) {
+            case 'fakultetBean': return data.fakultetBean.naziv.toLocaleLowerCase();
+            default: return data[property];
+          }
+        };
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       });
