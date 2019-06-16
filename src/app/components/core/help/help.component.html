@@ -1,3 +1,44 @@
-<p>
-  help works!
-</p>
+<mat-toolbar color="primary">
+  <span class="title-center">Pomoc</span>
+</mat-toolbar>
+<mat-card class="help-card">
+  <mat-card-header>
+    <mat-card-title>Pomoc</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Preuzimanje projekta</mat-panel-title>
+      </mat-expansion-panel-header>
+        <mat-panel-description>
+          <p>Ukoliko nije instaliran, potrebno je instalirati <a href="https://git-scm.com/download/win">Git</a> na racunaru.<br>
+          Koraci sa kloniranje projekta sa GitHuba<br><p>
+          <ul>
+            <li>U terminalu Visual Studio Code-a pozicionirati se na folder u koji će biti kloniran projekat</li>
+            <li>Naredbom git clone <a href="https://github.com/rva2019/IT51-2016-Petrovic-Milan.git">https://github.com/rva2019/IT51-2016-Petrovic-Milan.git</a>
+              projekat je kloniran sa GitHub-a</li>
+          </ul>
+        </mat-panel-description>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Pokretanje aplikacije</mat-panel-title>
+      </mat-expansion-panel-header>
+        <mat-panel-description>
+         <p><strong>Prije pokretanja frontend apliakcije, pokrenuti backend aplikaciju<br></strong>
+        Instalirati Google Chrome plugin: <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">CORS</a><br>
+        dodati u <strong>Intercepted URLs or URL patterns</strong> sledeće URL-ove:<br><p>
+        <ul>
+          <li>http://localhost:8083/</li>
+          <li>http://localhost:4200/</li>
+        </ul><br><p>
+        Omogućiti Enable cross-origin resource sharing u Chrome-u. U integrisanom Terminalu VSC-a, pozicionirati se unutar kloniranog projekta i izvršiti sledeće naredbe:<br><p>
+          <ul>
+            <li><strong>npm install</strong> - za preuzimanje node-modules (modula potrebnih za pokretanje aplikacije)</li>
+            <li><strong>ng serve -o</strong> - pokretanje aplikacije (aplikacija je pokrenuta na portu 4200 i automatski se otvara default browser na linku: http://localhost:4200/)</li>
+          </ul>
+        </mat-panel-description>
+    </mat-expansion-panel>
+  </mat-card-content>
+</mat-card>

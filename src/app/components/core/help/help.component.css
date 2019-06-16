@@ -1,0 +1,13 @@
+.help-card {
+  margin-top: 20px;
+  margin-left:10px;
+  margin-right:10px;
+}
+.title-center {
+  margin: 0  auto;
+ }
+
+mat-expansion-panel {
+  margin-top:10px;
+  margin-bottom: 10px;
+}
